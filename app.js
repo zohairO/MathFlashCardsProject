@@ -1,5 +1,7 @@
 console.log('This works');
 
+// Menu toggles
+
 document.getElementById("menuToggle").addEventListener("click", function() {
     var menu = document.getElementById("sideMenu");
     if (menu.style.width == '250px') {
@@ -8,27 +10,6 @@ document.getElementById("menuToggle").addEventListener("click", function() {
         menu.style.width = '250px';
     }
 });
-
-// document.addEventListener("DOMContentLoaded", function() {
-//     // Find the "Quadratics" menu item that acts as the toggle
-//     var toggleItem = document.querySelector('.submenu-toggle');
-
-//     // Add click event listener to toggle the display of the submenu
-//     toggleItem.addEventListener('click', function(event) {
-//         // Prevent the link action
-//         event.preventDefault();
-
-//         // This finds the nested submenu within the clicked item
-//         var submenu = this.querySelector('.submenu'); // Accurately target the submenu
-
-//         if (submenu.style.display === 'block') {
-//             submenu.style.display = 'none';
-//         } else {
-//             submenu.style.display = 'block';
-//         }
-//     });
-// });
-
 
 document.addEventListener("DOMContentLoaded", function() {
     // Find the "Quadratics" menu item that acts as the toggle
@@ -48,7 +29,28 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+// target the numbers
+function QuadraticCondition(b , c) {
+    // there are two numbers that multiply to make c
+    // there are two numberss that add to make b 
+    const discriminant = b*b - 4*c
+    const isDiscriminantValid = Number.isInteger(Math.sqrt(discriminant));
+    return isDiscriminantValid && c!=0 && b!=0
+}
 
+function format (number) {
+    return (number > 0 ? "+" : "-") + Math.abs(number);
+}
 
+function GenerateAppropriateNumbers() {
+    let b,c
+    do {
+        b = Math.floor(Math.random() * 20) - 10
+        c = Math.floor(Math.random() * 20) - 10
+    } while (!QuadraticCondition(b,c));
 
+    document.getElementById("b").textContent = format(b)
+    document.getElementById("c").textContent = format(c)
+}
 
+document.addEventListener('DOMContentLoaded', GenerateAppropriateNumbers());
