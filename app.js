@@ -1,38 +1,5 @@
-console.log('This works');
-
-// Menu toggles
-
-document.getElementById("menuToggle").addEventListener("click", function() {
-    var menu = document.getElementById("sideMenu");
-    if (menu.style.width == '250px') {
-        menu.style.width = '0';
-    } else {
-        menu.style.width = '250px';
-    }
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    // Find the "Quadratics" menu item that acts as the toggle
-    var toggleItem = document.querySelector('.submenu-toggle');
-
-    // Add click event listener to toggle the display of the submenu
-    toggleItem.addEventListener('click', function(event) {
-        // Check if the clicked item is not a submenu item
-        if (!event.target.closest('.submenu')) {
-            // Toggle the display of the submenu
-            var submenu = this.querySelector('.submenu');
-            submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-            
-            // Prevent the default action only for clicks directly on the toggle item
-            event.preventDefault();
-        }
-    });
-});
-
 // target the numbers
 function QuadraticCondition(b , c) {
-    // there are two numbers that multiply to make c
-    // there are two numberss that add to make b 
     const discriminant = b*b - 4*c
     const isDiscriminantValid = Number.isInteger(Math.sqrt(discriminant));
     return isDiscriminantValid && c!=0 && b!=0
@@ -51,6 +18,58 @@ function GenerateAppropriateNumbers() {
 
     document.getElementById("b").textContent = format(b)
     document.getElementById("c").textContent = format(c)
+
+    // reset feilds of button and inputs
+    let button = document.getElementById("btn-check")
+    button.textContent = "check"
+    button.onclick = () => {
+        CheckValidAnswer()    
+    }
+
+    document.getElementById("input-1").value = ''
+    document.getElementById("input-2").value = ''
+
+    var tick = document.getElementById("tick")
+    tick.style.opacity = 0
+
+
 }
 
-document.addEventListener('DOMContentLoaded', GenerateAppropriateNumbers());
+function CheckValidAnswer() {
+
+    const ans1 = parseInt(document.getElementById("input-1").value)
+    const ans2 = parseInt(document.getElementById("input-2").value)
+
+    if (isNaN(ans1) || isNaN(ans2)) {
+        console.log("your inputs are invalid")
+    
+    } else {
+
+        const b = parseInt(document.getElementById("b").textContent)
+        const c = parseInt(document.getElementById("c").textContent)
+        
+        if (ans1 * ans2 == c && ans1 + ans2 == b) {
+
+            // remove the cross
+            var cross = document.getElementById("cross")
+            cross.style.opacity = 0
+
+            // make tick visible
+            var tick = document.getElementById("tick")
+            tick.style.opacity = 100
+
+            //next button
+            let button = document.getElementById("btn-check")
+            button.textContent = "next"
+            button.onclick = () => {
+                GenerateAppropriateNumbers()
+    
+            }
+
+        } else {
+            var cross = document.getElementById("cross")
+            cross.style.opacity = 100
+            console.log("incorrect")
+        }
+    }
+}

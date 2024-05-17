@@ -10,19 +10,34 @@
 
     <body>
         
+        <!-- The below is for the aimation  -->
+        <!-- <div class="startingCharacter"> 
+            <img src="/thumbnails/DemoRpgCharacter.png"
+                class="characterSprite pixelart">
+        </div>
+         -->
+
+
+
         <div class="flashcard">
             <div class="math-problem">
-                <div class="math-problemdiv">x<sup>2</sup><span id="b">4</span>x <span id="c">4</span></div>
+                <div class="math-problemdiv">x<sup>2</sup><span id="b">+4</span>x <span id="c">+4</span></div>
             
                 <div class="answer">
-                    <input type="number" id="input-1" placeholder="(x - a)" style="margin-right: 5px;">
-                    <input type="number" id="input-1" placeholder="(x - b)">
+                    (x - <input type="text" id="input-1" placeholder="a">)
+                    (x - <input type="text" id="input-2" placeholder="b">)
+                    <img src="/thumbnails/istockphoto-1079725292-612x612.jpg" id="tick">
+                    <img src="/thumbnails/360_F_337038060_Qop3sB2npXc96CUqt8DPcNvZKWEXSHLj.jpg" id="cross">
                 </div>
-            
-                <button class="btn" onclick="GenerateAppropriateNumbers()">check</button>
+                
+                <button id="btn-check" class="btn" onclick="CheckValidAnswer()">check</button>
+                <!-- <button id="btn-next" class="btn" onclick="GenerateAppropriateNumbers()">next</button> -->
             </div>
         </div>
+        
 
+
+        
         <script src="/app.js"></script>
     </body>
-</html>
+    </html>
